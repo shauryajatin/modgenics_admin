@@ -1,25 +1,28 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Login from './Login';
-import Contacts from './Contacts';
-import { AuthProvider, useAuth } from './AuthContext';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
-const PrivateRoute = ({ element, ...rest }) => {
-  const { state } = useAuth();
-  return state.token ? element : <Navigate to="/login" />;
-};
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import { useState } from 'react';
+import RefrshHandler from './RefrshHandler';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const PrivateRoute = ({ element }) => {
+    return isAuthenticated ? element : <Navigate to="/login" />
+  }
+
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/contacts" element={<PrivateRoute element={<Contacts />} />} />
-          <Route path="/" element={<Navigate to="/login" />} />
-        </Routes>
-      </AuthProvider>
-    </Router>
+    <div className="App">
+      <RefrshHandler setIsAuthenticated={setIsAuthenticated} />
+      <Routes>
+        <Route path='/' element={<Navigate to="/login" />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/home' element={<PrivateRoute element={<Home />} />} />
+      </Routes>
+    </div>
   );
 }
 
