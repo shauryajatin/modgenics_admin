@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useAuth } from './AuthContext';
 
-function Contacts({ token }) {
+function Contacts() {
+  const { state, logout } = useAuth();
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
     const fetchContacts = async () => {
       const response = await fetch('http://localhost:3000/contact', {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${state.token}`,
         },
       });
 
@@ -20,11 +22,12 @@ function Contacts({ token }) {
     };
 
     fetchContacts();
-  }, [token]);
+  }, [state.token]);
 
   return (
     <div>
       <h1>Contacts</h1>
+      <button onClick={logout}>Logout</button>
       <ul>
         {contacts.map(contact => (
           <li key={contact._id}>

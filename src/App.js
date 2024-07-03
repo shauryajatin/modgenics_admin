@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Login from './components/login.js';
-import Contacts from './components/contacts.js';
+import Login from './Login';
+import Contacts from './Contacts';
+import { AuthProvider, useAuth } from './AuthContext';
+
+const PrivateRoute = ({ element, ...rest }) => {
+  const { state } = useAuth();
+  return state.token ? element : <Navigate to="/login" />;
+};
 
 function App() {
-  const [token, setToken] = useState('');
-
   return (
     <Router>
-      <Routes>
-        <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/contacts" element={token ? <Contacts token={token} /> : <Navigate to="/login" />} />
-        <Route path="/" element={<Navigate to="/login" />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/contacts" element={<PrivateRoute element={<Contacts />} />} />
+          <Route path="/" element={<Navigate to="/login" />} />
+        </Routes>
+      </AuthProvider>
     </Router>
   );
 }

@@ -1,43 +1,25 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
-function Login({ setToken }) {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+function Login() {
+  const { login } = useAuth();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
-
-    const response = await fetch('http://localhost:3000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setToken(data.token);
-      navigate('/contacts');
-    } else {
-      alert('Login failed');
-    }
+    login(email, password);
   };
 
   return (
     <form onSubmit={handleLogin}>
       <div>
         <label>
-          Username:
+          Email:
           <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
