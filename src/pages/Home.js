@@ -46,10 +46,10 @@ function Home() {
     }, []);
 
     return (
-       <div> <div>  <button className='logout-button' onClick={handleLogout}>Logout</button>
-        </div>
+       <div> 
         <div className='home-container'>
-            <button className='logout-button' onClick={handleLogout}>Logout</button>
+        <div>  <button className='logout-button' onClick={handleLogout}>Logout</button>
+        </div>
             <div className='contacts-container'>
                 {contacts && contacts.map((contact) => (
                     <div className='contact-card' key={contact._id}>
