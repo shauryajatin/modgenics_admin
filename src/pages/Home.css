@@ -1,24 +1,7 @@
 /* Home.css */
 
 .home-container {
-    position: relative; /* Ensures child elements with absolute positioning are relative to this container */
-    /* Other styles */
-}
-
-.logout-button {
-    position: absolute; /* Positions the button absolutely within its relative parent */
-    right: 20px; /* Adjust as needed */
-    top: 20px; /* Adjust as needed */
-    z-index: 10; /* Ensures the button is above other content */
-    /* Other styles */
-}
-
-.contacts-container {
-    overflow-y: auto; /* Enables vertical scrolling for overflowing content */
-    max-height: 90vh; /* Adjust based on your layout, ensures it doesn't take more than 90% of the viewport height */
-    /* Other styles */
-}
-.home-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,6 +11,10 @@
 }
 
 .logout-button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 10;
     background-color: #ff4b5c;
     color: white;
     border: none;
@@ -44,6 +31,8 @@
 }
 
 .contacts-container {
+    overflow-y: auto;
+    max-height: 90vh;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
@@ -73,4 +62,41 @@
 .contact-card p {
     margin: 5px 0;
     color: #666;
+}
+
+/* Adjustments for medium screens (tablets) */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 15px;
+    }
+
+    .logout-button {
+        right: 15px;
+        top: 15px;
+        padding: 8px 15px;
+    }
+
+    .contacts-container {
+        max-height: 85vh;
+    }
+}
+
+/* Adjustments for small screens (mobile devices) */
+@media (max-width: 480px) {
+    .home-container {
+        padding: 10px;
+        align-items: stretch;
+        flex-direction: row;
+    }
+
+    .logout-button {
+        position: fixed;
+        right: 10px;
+        top: 10px;
+        padding: 6px 12px;
+    }
+
+    .contacts-container {
+        max-height: 80vh;
+    }
 }
