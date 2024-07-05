@@ -1,13 +1,22 @@
 /* Home.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
 .home-container {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background-color: #f4f4f9;
+    padding: 40px;
     min-height: 90vh;
+    background-color: #b7b7bf;
 }
 
 .logout-button {
@@ -22,12 +31,12 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    margin-bottom: 20px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .logout-button:hover {
     background-color: #ff0000;
+    transform: scale(1.05);
 }
 
 .contacts-container {
@@ -38,30 +47,35 @@
     gap: 20px;
     width: 100%;
     max-width: 1200px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .contact-card {
-    background-color: white;
+    background-color: rgb(189, 184, 184);
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .contact-card:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
 }
 
 .contact-card h2 {
     margin-top: 0;
     font-size: 24px;
     color: #333;
+    font-weight: 500;
 }
 
 .contact-card p {
     margin: 5px 0;
     color: #666;
+    font-size: 16px;
 }
 
 /* Adjustments for medium screens (tablets) */
@@ -85,18 +99,30 @@
 @media (max-width: 480px) {
     .home-container {
         padding: 10px;
-        align-items: stretch;
-        flex-direction: row;
     }
 
     .logout-button {
-        position: fixed;
         right: 10px;
         top: 10px;
         padding: 6px 12px;
+        font-size: 14px;
     }
 
     .contacts-container {
+        display: block;
         max-height: 80vh;
+    }
+
+    .contact-card {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    .contact-card h2 {
+        font-size: 20px;
+    }
+
+    .contact-card p {
+        font-size: 14px;
     }
 }
